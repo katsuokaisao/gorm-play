@@ -25,3 +25,14 @@ func (repo *bookRepository) FindByID(id int) (*book.Book, error) {
 
 	return &book, nil
 }
+
+func (repo *bookRepository) FindAll() ([]book.Book, error) {
+	sess := repo.db.NewSession()
+
+	var books []book.Book
+	if err := sess.Find(&books).Error; err != nil {
+		return nil, err
+	}
+
+	return books, nil
+}

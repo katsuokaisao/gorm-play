@@ -35,5 +35,12 @@ func (u *gormUseCase) Test() {
 		panic(err)
 	}
 
-	fmt.Println(*b)
+	fmt.Println("FindByID(1) result", *b)
+
+	books, err := u.bookRepository.FindAll()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("FindAll() result", books)
 }
