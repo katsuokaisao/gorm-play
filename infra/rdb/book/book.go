@@ -30,7 +30,7 @@ func (repo *bookRepository) FindAll() ([]book.Book, error) {
 	sess := repo.db.NewSession()
 
 	var books []book.Book
-	if err := sess.Preload("BookReviews").Find(&books).Error; err != nil {
+	if err := sess.Preload("BookReviews").Preload("Authors").Find(&books).Error; err != nil {
 		return nil, err
 	}
 

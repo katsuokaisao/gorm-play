@@ -3,7 +3,6 @@ package gorm
 import (
 	"fmt"
 
-	"github.com/katsuokaisao/gorm/domain/author"
 	"github.com/katsuokaisao/gorm/domain/book"
 )
 
@@ -14,13 +13,13 @@ type GormUseCase interface {
 type gormUseCase struct {
 	bookRepository        book.BookRepository
 	bookRewViewRepository book.BookReviewRepository
-	authorRepository      author.AuthorRepository
+	authorRepository      book.AuthorRepository
 }
 
 func NewGormUseCase(
 	bookRepository book.BookRepository,
 	bookRewViewRepository book.BookReviewRepository,
-	authorRepository author.AuthorRepository,
+	authorRepository book.AuthorRepository,
 ) GormUseCase {
 	return &gormUseCase{
 		bookRepository:        bookRepository,
@@ -35,12 +34,20 @@ func (u *gormUseCase) Test() {
 		panic(err)
 	}
 
-	fmt.Println("FindByID(1) result", *b)
+	fmt.Println("FindByID(1) result book1-title", b.Title)
 
 	books, err := u.bookRepository.FindAll()
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println("FindAll() result", books)
+	for i, book := range books {
+		fmt.Printf("FindAll() result book%d-title: %s\n", i, book.Title)
+		for j, author := range book.Authors {
+			fmt.Printf("FindAll() result book%d-author%d-name: %s\n", i, j, author.Name)
+		}
+		for j, review := range book.BookReviews {
+			fmt.Printf("FindAll() result book%d-review%d-review: %s\n", i, j, review.Review)
+		}
+	}
 }

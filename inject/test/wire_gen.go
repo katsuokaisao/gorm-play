@@ -9,7 +9,6 @@ package test
 import (
 	"github.com/katsuokaisao/gorm/config"
 	"github.com/katsuokaisao/gorm/infra/rdb"
-	"github.com/katsuokaisao/gorm/infra/rdb/author"
 	"github.com/katsuokaisao/gorm/infra/rdb/book"
 	"github.com/katsuokaisao/gorm/usecase/gorm"
 )
@@ -21,7 +20,7 @@ func SetApplication(cfg *config.Config) *Application {
 	rdbRDB := rdb.NewRDB(rdbConfig)
 	bookRepository := book.NewBookRepository(rdbRDB)
 	bookReviewRepository := book.NewBookReviewRepository(rdbRDB)
-	authorRepository := author.NewAuthorRepository(rdbRDB)
+	authorRepository := book.NewAuthorRepository(rdbRDB)
 	gormUseCase := gorm.NewGormUseCase(bookRepository, bookReviewRepository, authorRepository)
 	application := NewApplication(gormUseCase)
 	return application

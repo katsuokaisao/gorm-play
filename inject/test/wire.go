@@ -20,7 +20,6 @@ package test
 import (
 	"github.com/google/wire"
 	"github.com/katsuokaisao/gorm/config"
-	"github.com/katsuokaisao/gorm/infra/rdb/author"
 	"github.com/katsuokaisao/gorm/infra/rdb/book"
 	"github.com/katsuokaisao/gorm/usecase/gorm"
 )
@@ -31,7 +30,7 @@ func SetApplication(cfg *config.Config) *Application {
 		gorm.NewGormUseCase,
 		book.NewBookRepository,
 		book.NewBookReviewRepository,
-		author.NewAuthorRepository,
+		book.NewAuthorRepository,
 		dbSet,
 	)
 	return &Application{}

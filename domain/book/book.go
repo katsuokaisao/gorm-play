@@ -1,6 +1,8 @@
 package book
 
-import "time"
+import (
+	"time"
+)
 
 type Book struct {
 	ID int64 `gorm:"primary_key"`
@@ -9,6 +11,7 @@ type Book struct {
 	ISBN  string `gorm:"isbn"`
 
 	BookReviews []BookReview `gorm:"foreignkey:BookID"`
+	Authors     []Author     `gorm:"many2many:book_authors"`
 
 	CreatedAt time.Time `gorm:"created_at"`
 	UpdatedAt time.Time `gorm:"updated_at"`
