@@ -1,0 +1,7 @@
+[DB]
+    Driver = "postgres"
+    Address = "db"
+    Username = "username"
+    Password = "password"
+    Database = "mydatabase"
+    Debug = false
