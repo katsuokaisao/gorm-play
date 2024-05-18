@@ -16,7 +16,7 @@ var rootCmd = &cobra.Command{
 var cfg *config.Config
 
 func init() {
-	rootCmd.AddCommand(testCmd)
+	rootCmd.AddCommand(authorFindAll)
 	initConfig()
 }
 

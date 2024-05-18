@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var testCmd = &cobra.Command{
+var authorFindAll = &cobra.Command{
 	Use:   "author-find-all",
 	Short: "Find all authors",
 	Run: func(cmd *cobra.Command, args []string) {
