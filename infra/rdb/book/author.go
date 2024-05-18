@@ -31,6 +31,14 @@ func (r *authorRepository) FindByID(id int64) (*book.Author, error) {
 	return &author, nil
 }
 
+func (r *authorRepository) FindByName(name string) (*book.Author, error) {
+	var author book.Author
+	if err := r.db.NewSession().Where("name = ?", name).First(&author).Error; err != nil {
+		return nil, err
+	}
+	return &author, nil
+}
+
 func (r *authorRepository) Create(author *book.Author) (*book.Author, error) {
 	err := r.db.NewSession().Create(author).Error
 	return author, err
@@ -45,7 +53,7 @@ func (r *authorRepository) Update(id int64, name *string) error {
 }
 
 func (r *authorRepository) Delete(id int64) error {
-	return r.db.NewSession().Delete(&book.Author{}, id).Error
+	return r.db.NewSession().Where("id = ?", id).Delete(&book.Author{}).Error
 }
 
 func (r *authorRepository) DeleteByIDs(ids []int64) error {
