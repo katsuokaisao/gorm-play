@@ -67,7 +67,7 @@ func connect(config Config) (*gorm.DB, error) {
 	dialect = config.Driver
 	add := strings.Split(config.Address, ":")
 	host = add[0]
-	if len(add) > 2 {
+	if len(add) == 2 {
 		port = add[1]
 	}
 

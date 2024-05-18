@@ -17,4 +17,10 @@ type Author struct {
 }
 
 type AuthorRepository interface {
+	FindAll() ([]Author, error)
+	FindByID(id int64) (*Author, error)
+	Create(author *Author) error
+	Update(id int64, name *string) error
+	Delete(id int64) error
+	DeleteByIDs(ids []int64) error
 }

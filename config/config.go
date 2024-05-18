@@ -5,10 +5,10 @@ type Config struct {
 }
 
 type DB struct {
-	Driver   string
-	Address  string
-	Username string
-	Password string
-	Database string
-	Debug    bool
+	Driver   string `env:"DB_DRIVER"`
+	Address  string `env:"DB_ADDRESS"`
+	Username string `env:"DB_USERNAME"`
+	Password string `env:"DB_PASSWORD"`
+	Database string `env:"DB_DATABASE"`
+	Debug    bool   `env:"DB_DEBUG"`
 }

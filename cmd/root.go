@@ -1,36 +1,36 @@
 package cmd
 
 import (
+	"log"
+
+	"github.com/caarlos0/env"
+	"github.com/joho/godotenv"
 	"github.com/katsuokaisao/gorm/config"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
 var rootCmd = &cobra.Command{
 	Use: "",
 }
 
-var cfg config.Config
+var cfg *config.Config
 
 func init() {
-	cobra.OnInitialize(initConfig)
-
 	rootCmd.AddCommand(testCmd)
+	initConfig()
 }
 
 func initConfig() {
-	cfgFileName := "settings/setting.toml"
-
-	viper.SetConfigFile(cfgFileName)
-	viper.AutomaticEnv()
-
-	if err := viper.ReadInConfig(); err != nil {
-		panic(err)
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found")
 	}
-
-	if err := viper.Unmarshal(&cfg); err != nil {
-		panic(err)
+	c := config.Config{
+		DB: &config.DB{},
 	}
+	if err := env.Parse(&c); err != nil {
+		log.Fatalf("%+v\n", err)
+	}
+	cfg = &c
 }
 
 func Execute() {

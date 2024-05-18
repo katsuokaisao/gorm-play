@@ -13,4 +13,8 @@ WORKDIR /app
 
 RUN go install github.com/cortesi/modd/cmd/modd@latest
 
-CMD ["sh", "-c", "/go/bin/linux_amd64/modd -f docker/modd.conf"]
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+COPY . .
