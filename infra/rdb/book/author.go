@@ -25,7 +25,7 @@ func (r *authorRepository) FindAll() ([]book.Author, error) {
 
 func (r *authorRepository) FindByID(id int64) (*book.Author, error) {
 	var author book.Author
-	if err := r.db.NewSession().Find(&author, id).Error; err != nil {
+	if err := r.db.NewSession().Where("id = ?", id).First(&author).Error; err != nil {
 		return nil, err
 	}
 	return &author, nil
@@ -50,4 +50,3 @@ func (r *authorRepository) Delete(id int64) error {
 func (r *authorRepository) DeleteByIDs(ids []int64) error {
 	return r.db.NewSession().Delete(&book.Author{}, ids).Error
 }
-
