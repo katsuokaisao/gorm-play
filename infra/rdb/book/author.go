@@ -44,6 +44,10 @@ func (r *authorRepository) Create(author *book.Author) (*book.Author, error) {
 	return author, err
 }
 
+func (r *authorRepository) CreateBulk(authors []book.Author) error {
+	return r.db.NewSession().Create(&authors).Error
+}
+
 func (r *authorRepository) Update(id int64, name *string) error {
 	input := map[string]interface{}{}
 	if name != nil {

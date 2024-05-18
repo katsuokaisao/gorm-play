@@ -20,6 +20,7 @@ type AuthorRepository interface {
 	FindByID(id int64) (*Author, error)
 	FindByName(name string) (*Author, error)
 	Create(author *Author) (*Author, error)
+	CreateBulk(authors []Author) error
 	Update(id int64, name *string) error
 	Delete(id int64) error
 	DeleteByIDs(ids []int64) error

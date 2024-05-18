@@ -38,7 +38,7 @@ var authorFindByIdCmd = &cobra.Command{
 		}
 		fmt.Println(string(b))
 
-		author, err = authorRepo.FindByID(100)
+		author, err = authorRepo.FindByID(10000)
 		if err != nil {
 			if errors.Is(err, gorm.ErrRecordNotFound) {
 				fmt.Println("Author not found")
