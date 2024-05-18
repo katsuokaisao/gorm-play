@@ -21,6 +21,7 @@ func init() {
 	rootCmd.AddCommand(authorCreateCmd)
 	rootCmd.AddCommand(authorDeleteCmd)
 	rootCmd.AddCommand(authorDeleteIdsCmd)
+	rootCmd.AddCommand(authorUpdateCmd)
 	initConfig()
 }
 
