@@ -18,6 +18,7 @@ var cfg *config.Config
 func init() {
 	rootCmd.AddCommand(authorFindAll)
 	rootCmd.AddCommand(authorFindByIdCmd)
+	rootCmd.AddCommand(authorCreateCmd)
 	initConfig()
 }
 

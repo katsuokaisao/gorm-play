@@ -90,7 +90,7 @@ func connect(config Config) (*gorm.DB, error) {
 		return nil, fmt.Errorf("invalid database dialect: %s", dialect)
 	}
 
-	db, err := gorm.Open(dialector, &gorm.Config{})
+	db, err := gorm.Open(dialector, &gorm.Config{TranslateError: true})
 	if err != nil {
 		return nil, err
 	}

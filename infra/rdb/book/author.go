@@ -31,8 +31,9 @@ func (r *authorRepository) FindByID(id int64) (*book.Author, error) {
 	return &author, nil
 }
 
-func (r *authorRepository) Create(author *book.Author) error {
-	return r.db.NewSession().Create(author).Error
+func (r *authorRepository) Create(author *book.Author) (*book.Author, error) {
+	err := r.db.NewSession().Create(author).Error
+	return author, err
 }
 
 func (r *authorRepository) Update(id int64, name *string) error {
